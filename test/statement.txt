@@ -1,0 +1,42 @@
+# Basic return
+
+return 5
+
+==>
+Chunk(Block(ReturnStatement(return,Number)))
+
+# Function definition
+
+function myFunc()
+  print(9)
+end
+
+==>
+Chunk(Block(Function(function,FuncName(Name),FuncBody(Block(FunctionCall(Name,Number)),end))))
+
+# Function call call
+
+thing(1)()
+
+==>
+Chunk(Block(FunctionCall(FunctionCall(Name,Number))))
+
+# local assignment
+
+local num = 99
+local num<const> = 99
+
+==>
+Chunk(Block(
+  Local(local,AttNameList(Name,Attrib),ExpList(Number)),
+  Local(local,AttNameList(Name,Attrib(Name)),ExpList(Number))))
+
+# String test
+
+x = "\n"
+x = "\69"
+
+==>
+Chunk(Block(
+  Assign(VarList(Name),ExpList(LiteralString)),
+  Assign(VarList(Name),ExpList(LiteralString))))
